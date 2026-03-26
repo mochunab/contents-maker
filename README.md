@@ -2,11 +2,17 @@
 
 # Contents Maker
 
-### AI-Powered Content Production Studio
+### Generate short-form videos, ad creatives, and card news — entirely in the browser. No FFmpeg. No GPU server.
 
-**7 AI content generators + Browser-based video rendering engine**
+<br/>
 
-Trend Tracker | Card News | Short-form Video | Meme Ad Video | Ad Copy | Ad Creative | Thumbnail
+<img src="./docs/demo.gif" alt="Contents Maker Demo — Hub → Setup → Script → Video" width="320" />
+
+<br/>
+
+**Topic Input → AI Script → 18 Motion Styles → MP4 Export** — zero server-side rendering
+
+<br/>
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React_18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
@@ -15,70 +21,71 @@ Trend Tracker | Card News | Short-form Video | Meme Ad Video | Ad Copy | Ad Crea
 [![Gemini](https://img.shields.io/badge/Gemini_AI-8E75B2?logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-[한국어](#한국어) | [English](#english)
-
-<br/>
-
-<img src="./docs/demo.gif" alt="Contents Maker Demo — Hub → Setup → Script → Video" width="320" />
-
-**Hub → Configure → AI Script → Video Export** — all in the browser
+[English](#how-it-works) | [한국어](#한국어)
 
 </div>
 
 ---
 
-## English
+## Why this exists
 
-### What is this?
+Most AI video tools require GPU servers, FFmpeg pipelines, or expensive SaaS subscriptions.
 
-**Contents Maker** is an AI-powered content production studio that generates marketing content entirely in the browser. From trend analysis to video rendering — no server-side video processing required.
+**Contents Maker renders videos directly in the browser** using `Canvas` + `WebCodecs` + `mp4-muxer`. The AI generates scripts and images via Supabase Edge Functions — the browser does the rest.
 
-Built as the internal content engine for [nadaunse.com](https://nadaunse.com), a Korean fortune-telling service.
+Built as the production content engine behind [nadaunse.com](https://nadaunse.com). Now open source.
 
-### Key Features
+---
 
-| Tool | Description | AI Model |
-|------|-------------|----------|
-| **Trend Tracker** | Real-time X (Twitter) trending + AI topic analysis | Gemini + Google Search Grounding |
-| **Card News Maker** | AI-generated slide decks with stock/AI images | Gemini Image Generation |
-| **Short-form Video Maker** | 10/15/30s vertical videos with 18 motion graphics | Gemini + ElevenLabs TTS + Remotion |
-| **Meme Ad Video Maker** | Meme hook + AI ad script video synthesis | Gemini + WebCodecs |
-| **Ad Copy Maker** | Behavioral economics-based ad copy generation | Gemini |
-| **Ad Creative Maker** | Full ad poster design with AI image generation | Gemini Image Generation |
-| **Thumbnail Maker** | Reference-based AI thumbnail with batch generation | Gemini Image Generation |
-
-### Architecture
+## How it works
 
 ```
-Browser (React + TypeScript + Tailwind CSS)
-├── Remotion Player ── Real-time video preview
-├── Canvas + WebCodecs + mp4-muxer ── Browser-side MP4 encoding
-├── 18 Motion Graphics ── Spring animations, glitch, parallax, etc.
-├── Lottie Overlays ── 10 animated overlay effects
-└── Audio Reactive Visuals ── Frame-based beat simulation
-
-Supabase Edge Functions (Deno)
-├── Gemini 2.5 Flash ── Script/copy/creative generation (JSON mode)
-├── Gemini Flash Image ── AI image generation (card news, ads, thumbnails)
-├── ElevenLabs / OpenAI TTS ── Narration voice synthesis
-├── Replicate (Wan 2.5 / Hailuo / Kling) ── Image-to-Video conversion
-├── Jamendo API ── Royalty-free BGM search
-├── Unsplash + Pexels ── Stock image search
-└── Apify ── X trending data scraping
+You type a topic
+     ↓
+Gemini AI writes a scene-by-scene script (JSON)
+     ↓
+AI generates images (Gemini) or videos (Replicate I2V)
+     ↓
+ElevenLabs / OpenAI synthesizes narration
+     ↓
+Remotion previews → Canvas + WebCodecs encodes MP4
+     ↓
+Download. Done.
 ```
 
-### Video Engine Highlights
+---
 
-- **100% browser-side rendering** — No FFmpeg server. Uses `Canvas` + `WebCodecs` + `mp4-muxer`
-- **18 motion graphic styles** — keyword pop, typewriter, glitch, parallax layers, emoji rain, and more
-- **3 video types** — Motion graphics / AI image (Ken Burns) / AI video (Replicate I2V)
-- **Audio pipeline** — TTS narration + BGM with automatic ducking (volume reduction during speech)
-- **Remotion 4 integration** — `TransitionSeries` with 7 transition types + Light Leak effects
-- **Audio reactive visuals** — Glow pulse, beat flash, waveform (frame-based simulation, no `@remotion/media-utils`)
-- **Meme ad synthesis** — Frame extraction from uploaded hook video + AI ad scene rendering + audio mixing via `OfflineAudioContext`
-- **CapCut export** — Generate CapCut-compatible project JSON + TTS mp3 as ZIP
+## 7 Tools
 
-### 18 Motion Styles
+| Tool | What it does | AI |
+|------|-------------|-----|
+| **Trend Tracker** | Real-time X trending + AI topic analysis | Gemini + Google Search Grounding |
+| **Short-form Video** | 10/15/30s vertical videos with 18 motion graphics | Gemini + ElevenLabs TTS + Remotion |
+| **Meme Ad Video** | Meme hook clip + AI ad scene synthesis | Gemini + WebCodecs |
+| **Card News** | AI-generated slide decks with stock/AI images | Gemini Image Generation |
+| **Ad Copy** | Behavioral economics-based copywriting | Gemini |
+| **Ad Creative** | Full ad poster with AI image | Gemini Image Generation |
+| **Thumbnail** | Reference-based AI thumbnail + batch generation | Gemini Image Generation |
+
+---
+
+## Video Engine
+
+The core differentiator. **100% browser-side rendering** — no FFmpeg, no GPU server.
+
+| Feature | Detail |
+|---------|--------|
+| Rendering | `Canvas` + `WebCodecs` + `mp4-muxer` (H.264 + AAC) |
+| Preview | Remotion 4 `TransitionSeries` + 7 transition types + Light Leaks |
+| Motion Graphics | **18 styles** — keyword pop, typewriter, glitch, parallax, emoji rain, etc. |
+| Video Types | Motion graphics / AI image (Ken Burns) / AI video (Replicate I2V) |
+| Audio | TTS narration + BGM with automatic ducking |
+| Audio Reactive | Glow pulse, beat flash, waveform (frame-based, no `@remotion/media-utils`) |
+| Meme Ads | Hook frame extraction + AI ad scene + `OfflineAudioContext` mixing |
+| Export | MP4 download + CapCut project JSON + ZIP |
+
+<details>
+<summary><b>18 Motion Styles</b></summary>
 
 | Style | Effect |
 |-------|--------|
@@ -101,129 +108,96 @@ Supabase Edge Functions (Deno)
 | `sparkle_trail` | Sparkle trail effect |
 | `pulse_ring` | Expanding pulse rings |
 
-### Project Structure
+</details>
 
-```
-src/
-├── pages/                    # 8 page components (React)
-│   ├── ContentStudioPage     # Hub — all tools in one place
-│   ├── TrendTrackerPage      # X trending + AI topic analysis
-│   ├── CardNewsPage          # AI slide deck generator
-│   ├── ShortFormPage         # Short-form video maker
-│   ├── MemeAdPage            # Meme hook + ad video
-│   ├── AdCopyPage            # AI ad copy generator
-│   ├── AdCreativePage        # AI ad poster generator
-│   └── ThumbnailPage         # AI thumbnail generator
-├── shortform/                # Video rendering engine
-│   ├── types.ts              # Scene, TtsAudio, MotionStyle types
-│   ├── constants.ts          # 1080×1920, 30fps
-│   ├── renderVideo.ts        # Canvas + WebCodecs MP4 encoder
-│   ├── lottie/               # Lottie overlay system
-│   └── compositions/         # Remotion components
-│       ├── ShortFormVideo     # Root composition (TransitionSeries)
-│       ├── SceneRenderer      # Per-scene background + motion dispatch
-│       ├── SubtitleOverlay    # Word-level spring subtitles
-│       ├── AudioReactiveOverlay # Beat-synced visuals
-│       ├── LottieOverlay      # Animated overlay wrapper
-│       └── motions/           # 18 motion graphic components
-├── meme-ad/                  # Meme ad video engine
-│   ├── types.ts              # HookVideoInfo, MemeAdScriptResult
-│   ├── constants.ts          # Ad durations, hook sites
-│   ├── renderMemeAdVideo.ts  # Hook frame extraction + rendering
-│   └── compositions/         # Remotion meme ad components
-└── capcut/                   # CapCut project export
+---
 
-supabase/functions/           # 13 Edge Functions (Deno)
-├── search-trends/            # Apify X trending + Gemini analysis
-├── generate-card-news/       # Gemini → slide plan JSON
-├── generate-card-image/      # Gemini Image → background image
-├── search-stock-image/       # Unsplash/Pexels proxy
-├── generate-short-form/      # Gemini → short-form script JSON
-├── generate-tts/             # ElevenLabs/OpenAI → narration mp3
-├── generate-bgm/             # Jamendo → royalty-free BGM
-├── generate-meme-ad/         # Gemini → meme ad script JSON
-├── generate-ad-copy/         # Gemini → ad copy JSON
-├── generate-ad-creative/     # Gemini → ad creative plan JSON
-├── generate-ad-image/        # Gemini Image → ad poster
-├── generate-scene-video/     # Replicate → Image-to-Video
-└── generate-thumbnail-image/ # Gemini Image → thumbnail
-
-public/lottie/                # 10 Lottie animation assets
-```
-
-### Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18 + TypeScript + Tailwind CSS v4 + Vite |
-| Video Preview | Remotion 4 (`@remotion/player`, `TransitionSeries`) |
-| Video Encoding | Canvas + WebCodecs API + `mp4-muxer` (H.264 + AAC) |
-| Backend | Supabase Edge Functions (Deno runtime) |
-| AI Script | Google Gemini 2.5 Flash (JSON mode) |
-| AI Image | Gemini Flash Image Generation |
-| AI Video | Replicate (Wan 2.5 / Hailuo Fast / Kling v2.1) |
-| TTS | ElevenLabs `eleven_turbo_v2_5` / OpenAI `tts-1-hd` fallback |
-| BGM | Jamendo API v3.0 (royalty-free, CC license) |
-| Stock Images | Unsplash + Pexels |
-| Trend Data | Apify (X/Twitter scraper) |
-| Animation | Lottie (`@remotion/lottie`) |
-| Export | JSZip (card news ZIP, CapCut project ZIP) |
-
-### Quick Start
+## Quick Start
 
 ```bash
-# 1. Clone
 git clone https://github.com/mochunab/contents-maker.git
 cd contents-maker
-
-# 2. Install dependencies
 npm install
-
-# 3. Set up environment variables
-cp .env.example .env
-# Edit .env — fill in VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
-
-# 4. Deploy Edge Functions to your Supabase project
-npx supabase link --project-ref your-project-ref
-npx supabase functions deploy
-
-# 5. Set Edge Function secrets in Supabase Dashboard
-#    (Project Settings > Edge Functions > Secrets)
-
-# 6. Run dev server
+cp .env.example .env   # fill in your Supabase URL + anon key
 npm run dev
 ```
 
-### API Keys Setup
-
-Copy `.env.example` and fill in your API keys:
+Then deploy the 13 Edge Functions to your Supabase project:
 
 ```bash
-cp .env.example .env
+npx supabase link --project-ref your-project-ref
+npx supabase functions deploy
 ```
 
-| Service | Key | Get it from | Free Tier |
-|---------|-----|-------------|-----------|
-| **Google Gemini** | `GOOGLE_API_KEY` | [ai.google.dev/gemini-api](https://ai.google.dev/gemini-api/docs/api-key) | 15 RPM free |
-| **ElevenLabs** | `ELEVENLABS_API_KEY` | [elevenlabs.io/app/settings/api-keys](https://elevenlabs.io/app/settings/api-keys) | 10,000 chars/month free |
-| **OpenAI** (TTS fallback) | `OPENAI_API_KEY` | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) | Pay-per-use |
-| **Replicate** (I2V) | `REPLICATE_API_TOKEN` | [replicate.com/account/api-tokens](https://replicate.com/account/api-tokens) | Pay-per-use |
-| **Unsplash** | `UNSPLASH_ACCESS_KEY` | [unsplash.com/developers](https://unsplash.com/developers) | 50 req/hour (dev) |
-| **Pexels** | `PEXELS_API_KEY` | [pexels.com/api/new](https://www.pexels.com/api/new/) | 200 req/hour free |
-| **Apify** | `APIFY_API_TOKEN` | [console.apify.com/settings/integrations](https://console.apify.com/account/integrations) | $5/month free credit |
-| **Jamendo** | `JAMENDO_CLIENT_ID` | [devportal.jamendo.com](https://devportal.jamendo.com/) | 35,000 req/month free |
-| **Supabase** | `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` | [supabase.com/dashboard](https://supabase.com/dashboard) | Free tier available |
+Set API keys in **Supabase Dashboard > Project Settings > Edge Functions > Secrets**.
 
-> Edge Function environment variables are set in Supabase Dashboard > Project Settings > Edge Functions > Secrets
+### API Keys
 
-### Documentation
+| Service | Env Variable | Get it | Free Tier |
+|---------|-------------|--------|-----------|
+| **Google Gemini** | `GOOGLE_API_KEY` | [ai.google.dev](https://ai.google.dev/gemini-api/docs/api-key) | 15 RPM free |
+| **ElevenLabs** | `ELEVENLABS_API_KEY` | [elevenlabs.io](https://elevenlabs.io/app/settings/api-keys) | 10K chars/mo |
+| **OpenAI** (TTS fallback) | `OPENAI_API_KEY` | [platform.openai.com](https://platform.openai.com/api-keys) | Pay-per-use |
+| **Replicate** (I2V) | `REPLICATE_API_TOKEN` | [replicate.com](https://replicate.com/account/api-tokens) | Pay-per-use |
+| **Unsplash** | `UNSPLASH_ACCESS_KEY` | [unsplash.com/developers](https://unsplash.com/developers) | 50 req/hr |
+| **Pexels** | `PEXELS_API_KEY` | [pexels.com/api](https://www.pexels.com/api/new/) | 200 req/hr |
+| **Apify** | `APIFY_API_TOKEN` | [console.apify.com](https://console.apify.com/account/integrations) | $5/mo free |
+| **Jamendo** | `JAMENDO_CLIENT_ID` | [devportal.jamendo.com](https://devportal.jamendo.com/) | 35K req/mo |
+| **Supabase** | `VITE_SUPABASE_URL` + `ANON_KEY` | [supabase.com](https://supabase.com/dashboard) | Free tier |
 
-- **[Handover Document](./docs/CONTENT_STUDIO_HANDOVER.md)** — Complete technical specification for all 7 makers + 13 Edge Functions
+---
 
-### Browser Requirements
+## Architecture
 
-- **Chrome / Edge** (WebCodecs API required for video rendering)
-- Desktop only (internal production tool)
+```
+Browser (React 18 + TypeScript + Tailwind v4)
+├── Remotion Player ── real-time video preview
+├── Canvas + WebCodecs + mp4-muxer ── browser-side MP4 encoding
+├── 18 Motion Graphics ── spring animations, glitch, parallax…
+├── Lottie Overlays ── 10 animated overlay effects
+└── Audio Reactive Visuals ── frame-based beat simulation
+
+Supabase Edge Functions (Deno) — 13 functions
+├── Gemini 2.5 Flash ── script / copy / creative generation
+├── Gemini Flash Image ── AI image generation
+├── ElevenLabs / OpenAI TTS ── narration synthesis
+├── Replicate (Wan 2.5 / Hailuo / Kling) ── Image-to-Video
+├── Jamendo ── royalty-free BGM
+├── Unsplash + Pexels ── stock images
+└── Apify ── X trending data
+```
+
+<details>
+<summary><b>Project Structure</b></summary>
+
+```
+src/
+├── pages/                    # 8 page components
+├── shortform/                # Video rendering engine
+│   ├── renderVideo.ts        # Canvas + WebCodecs MP4 encoder
+│   ├── lottie/               # Lottie overlay system
+│   └── compositions/         # Remotion components + 18 motions
+├── meme-ad/                  # Meme ad video engine
+└── capcut/                   # CapCut project export
+
+supabase/functions/           # 13 Edge Functions
+public/lottie/                # 10 Lottie animation assets
+```
+
+</details>
+
+---
+
+## Browser Requirements
+
+- **Chrome / Edge** (WebCodecs API required)
+- Desktop recommended
+
+---
+
+## Documentation
+
+- **[Technical Handover](./docs/CONTENT_STUDIO_HANDOVER.md)** — Full specification for all 7 makers + 13 Edge Functions
 
 ---
 
@@ -232,58 +206,50 @@ cp .env.example .env
 ### 빠른 시작
 
 ```bash
-# 1. 클론
 git clone https://github.com/mochunab/contents-maker.git
 cd contents-maker
-
-# 2. 패키지 설치
 npm install
+cp .env.example .env   # VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY 입력
+npm run dev
+```
 
-# 3. 환경변수 설정
-cp .env.example .env
-# .env 파일에 VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY 입력
+Edge Functions 배포:
 
-# 4. Supabase Edge Functions 배포
+```bash
 npx supabase link --project-ref your-project-ref
 npx supabase functions deploy
-
-# 5. Edge Function 시크릿 설정
-#    Supabase Dashboard > Project Settings > Edge Functions > Secrets에서 API 키 입력
-
-# 6. 개발 서버 실행
-npm run dev
+# API 키는 Supabase Dashboard > Edge Functions > Secrets에서 설정
 ```
 
 ### 이게 뭔가요?
 
-**Contents Maker**는 AI 기반 콘텐츠 제작 스튜디오입니다. 트렌드 분석부터 영상 렌더링까지 — 서버 없이 브라우저에서 모든 것을 처리합니다.
+**Contents Maker**는 브라우저에서 숏폼 영상, 광고 소재, 카드뉴스를 만드는 AI 콘텐츠 스튜디오입니다. FFmpeg 서버 없이 `Canvas` + `WebCodecs`로 MP4를 렌더링합니다.
 
-[nadaunse.com](https://nadaunse.com) (나다운세) 서비스의 내부 콘텐츠 엔진으로 개발되었습니다.
+[nadaunse.com](https://nadaunse.com) (나다운세)의 내부 콘텐츠 엔진으로 개발 후 오픈소스로 공개했습니다.
 
-### 주요 기능
+### 7개 도구
 
 | 도구 | 설명 | AI |
 |------|------|----|
-| **트렌드 추적기** | X(트위터) 실시간 트렌딩 + AI 주제 분석 | Gemini + Google Search |
-| **카드뉴스 메이커** | AI 슬라이드 기획 + 스톡/AI 이미지 | Gemini Image |
-| **숏폼 메이커** | 10/15/30초 세로 영상 + 모션 그래픽 18종 | Gemini + ElevenLabs TTS + Remotion |
+| **트렌드 추적기** | X 실시간 트렌딩 + AI 주제 분석 | Gemini + Google Search |
+| **숏폼 메이커** | 10/15/30초 세로 영상 + 모션 18종 | Gemini + ElevenLabs TTS + Remotion |
 | **밈광고 메이커** | 밈 훅 영상 + AI 광고 대본 합성 | Gemini + WebCodecs |
-| **광고 카피 메이커** | 행동경제학 기반 광고 카피 생성 | Gemini |
-| **광고 소재 메이커** | AI 광고 포스터 디자인 + 이미지 생성 | Gemini Image |
-| **썸네일 메이커** | 레퍼런스 기반 AI 썸네일 + 배치 생성 | Gemini Image |
+| **카드뉴스 메이커** | AI 슬라이드 기획 + 스톡/AI 이미지 | Gemini Image |
+| **광고 카피 메이커** | 행동경제학 기반 광고 카피 | Gemini |
+| **광고 소재 메이커** | AI 광고 포스터 디자인 | Gemini Image |
+| **썸네일 메이커** | 레퍼런스 기반 AI 썸네일 + 배치 | Gemini Image |
 
-### 영상 엔진 특징
+### 영상 엔진
 
-- **100% 브라우저 렌더링** — FFmpeg 서버 불필요. `Canvas` + `WebCodecs` + `mp4-muxer` 사용
+- **100% 브라우저 렌더링** — FFmpeg/GPU 서버 불필요
 - **모션 그래픽 18종** — 키워드 팝, 타이핑, 글리치, 패럴랙스, 이모지 비 등
-- **영상 타입 3종** — 모션 그래픽 / AI 이미지 (Ken Burns) / AI 영상 (Replicate I2V)
-- **오디오 파이프라인** — TTS 나레이션 + BGM 자동 더킹 (음성 구간 볼륨 자동 조절)
-- **밈광고 합성** — 훅 영상 프레임 추출 + AI 광고 씬 + `OfflineAudioContext` 오디오 믹싱
-- **CapCut 내보내기** — CapCut 프로젝트 JSON + TTS mp3 ZIP 생성
+- **영상 3종** — 모션 / AI 이미지 (Ken Burns) / AI 영상 (I2V)
+- **오디오** — TTS 나레이션 + BGM 자동 더킹
+- **CapCut 내보내기** — 프로젝트 JSON + TTS ZIP
 
-### 광고 전략 체계
+### 광고 전략
 
-행동경제학 기반 10가지 광고 전략이 AI 프롬프트에 내장되어 있습니다:
+행동경제학 기반 10가지 전략이 AI 프롬프트에 내장:
 
 | 분류 | 전략 |
 |------|------|
@@ -299,5 +265,7 @@ npm run dev
 **Gemini** | **Remotion** | **WebCodecs** | **Supabase** | **ElevenLabs** | **Replicate**
 
 MIT License
+
+If this project is useful, a star helps others discover it.
 
 </div>
