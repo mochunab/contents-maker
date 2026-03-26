@@ -163,6 +163,31 @@ public/lottie/                # 10 Lottie animation assets
 | Animation | Lottie (`@remotion/lottie`) |
 | Export | JSZip (card news ZIP, CapCut project ZIP) |
 
+### Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/mochunab/contents-maker.git
+cd contents-maker
+
+# 2. Install dependencies
+npm install
+
+# 3. Set up environment variables
+cp .env.example .env
+# Edit .env — fill in VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY
+
+# 4. Deploy Edge Functions to your Supabase project
+npx supabase link --project-ref your-project-ref
+npx supabase functions deploy
+
+# 5. Set Edge Function secrets in Supabase Dashboard
+#    (Project Settings > Edge Functions > Secrets)
+
+# 6. Run dev server
+npm run dev
+```
+
 ### API Keys Setup
 
 Copy `.env.example` and fill in your API keys:
@@ -197,6 +222,31 @@ cp .env.example .env
 ---
 
 ## 한국어
+
+### 빠른 시작
+
+```bash
+# 1. 클론
+git clone https://github.com/mochunab/contents-maker.git
+cd contents-maker
+
+# 2. 패키지 설치
+npm install
+
+# 3. 환경변수 설정
+cp .env.example .env
+# .env 파일에 VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY 입력
+
+# 4. Supabase Edge Functions 배포
+npx supabase link --project-ref your-project-ref
+npx supabase functions deploy
+
+# 5. Edge Function 시크릿 설정
+#    Supabase Dashboard > Project Settings > Edge Functions > Secrets에서 API 키 입력
+
+# 6. 개발 서버 실행
+npm run dev
+```
 
 ### 이게 뭔가요?
 

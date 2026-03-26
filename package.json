@@ -1,0 +1,35 @@
+{
+  "name": "contents-maker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@remotion/light-leaks": "^4.0.438",
+    "@remotion/lottie": "^4.0.438",
+    "@remotion/player": "^4.0.438",
+    "@remotion/transitions": "^4.0.438",
+    "@supabase/supabase-js": "^2.49.8",
+    "html-to-image": "^1.11.13",
+    "jszip": "^3.10.1",
+    "lottie-web": "^5.13.0",
+    "mp4-muxer": "^5.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.5.0",
+    "remotion": "^4.0.438"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.3",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react-swc": "^3.10.2",
+    "tailwindcss": "^4.1.3",
+    "typescript": "^5.7.3",
+    "vite": "^6.4.1"
+  }
+}
