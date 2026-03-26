@@ -163,7 +163,7 @@ public/lottie/                # 10 Lottie animation assets
 | Animation | Lottie (`@remotion/lottie`) |
 | Export | JSZip (card news ZIP, CapCut project ZIP) |
 
-### Environment Variables
+### API Keys Setup
 
 Copy `.env.example` and fill in your API keys:
 
@@ -171,7 +171,23 @@ Copy `.env.example` and fill in your API keys:
 cp .env.example .env
 ```
 
-See [.env.example](./.env.example) for the full list of required keys.
+| Service | Key | Get it from | Free Tier |
+|---------|-----|-------------|-----------|
+| **Google Gemini** | `GOOGLE_API_KEY` | [ai.google.dev/gemini-api](https://ai.google.dev/gemini-api/docs/api-key) | 15 RPM free |
+| **ElevenLabs** | `ELEVENLABS_API_KEY` | [elevenlabs.io/app/settings/api-keys](https://elevenlabs.io/app/settings/api-keys) | 10,000 chars/month free |
+| **OpenAI** (TTS fallback) | `OPENAI_API_KEY` | [platform.openai.com/api-keys](https://platform.openai.com/api-keys) | Pay-per-use |
+| **Replicate** (I2V) | `REPLICATE_API_TOKEN` | [replicate.com/account/api-tokens](https://replicate.com/account/api-tokens) | Pay-per-use |
+| **Unsplash** | `UNSPLASH_ACCESS_KEY` | [unsplash.com/developers](https://unsplash.com/developers) | 50 req/hour (dev) |
+| **Pexels** | `PEXELS_API_KEY` | [pexels.com/api/new](https://www.pexels.com/api/new/) | 200 req/hour free |
+| **Apify** | `APIFY_API_TOKEN` | [console.apify.com/settings/integrations](https://console.apify.com/account/integrations) | $5/month free credit |
+| **Jamendo** | `JAMENDO_CLIENT_ID` | [devportal.jamendo.com](https://devportal.jamendo.com/) | 35,000 req/month free |
+| **Supabase** | `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` | [supabase.com/dashboard](https://supabase.com/dashboard) | Free tier available |
+
+> Edge Function environment variables are set in Supabase Dashboard > Project Settings > Edge Functions > Secrets
+
+### Documentation
+
+- **[Handover Document](./docs/CONTENT_STUDIO_HANDOVER.md)** — Complete technical specification for all 7 makers + 13 Edge Functions
 
 ### Browser Requirements
 
