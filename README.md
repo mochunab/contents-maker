@@ -17,6 +17,12 @@ Trend Tracker | Card News | Short-form Video | Meme Ad Video | Ad Copy | Ad Crea
 
 [한국어](#한국어) | [English](#english)
 
+<br/>
+
+<img src="./docs/demo.gif" alt="Contents Maker Demo — Hub → Setup → Script → Video" width="320" />
+
+**Hub → Configure → AI Script → Video Export** — all in the browser
+
 </div>
 
 ---
