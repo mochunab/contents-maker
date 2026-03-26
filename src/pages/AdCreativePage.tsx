@@ -322,7 +322,7 @@ export default function AdCreativePage() {
     setChatInput('');
     setImages({});
     setSelectedOption(null);
-    setImageGenerating(null);
+    setImageGenerating(new Set());
   };
 
   // ── Helpers ──
@@ -421,7 +421,7 @@ export default function AdCreativePage() {
                   <textarea
                     value={product}
                     onChange={e => setProduct(e.target.value)}
-                    placeholder="예: 나다운세 - AI 신년운세 종합운. 만세력·월별운까지 한눈에 확인"
+                    placeholder="예: MyApp - AI 콘텐츠 자동 생성 플랫폼. 영상·카드뉴스·광고까지 한번에"
                     rows={4}
                     className="w-full outline-none bg-transparent resize-none"
                     style={{

@@ -346,7 +346,7 @@ export default function AdCopyPage() {
                   <textarea
                     value={product}
                     onChange={e => setProduct(e.target.value)}
-                    placeholder="예: 나다운세 - AI 운세/타로 모바일 서비스"
+                    placeholder="예: MyApp - AI 기반 콘텐츠 제작 서비스"
                     rows={3}
                     className="w-full outline-none bg-transparent resize-none"
                     style={{

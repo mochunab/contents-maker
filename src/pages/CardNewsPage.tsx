@@ -924,9 +924,9 @@ export default function CardNewsPage() {
                           color: C.textCaption, textAlign: 'center',
                         }}>
                           Photo by{' '}
-                          <a href={`${unsplashCredits[1].photographer_url}?utm_source=nadaunse&utm_medium=referral`} target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>{unsplashCredits[1].photographer}</a>
+                          <a href={`${unsplashCredits[1].photographer_url}?utm_source=contents_maker&utm_medium=referral`} target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>{unsplashCredits[1].photographer}</a>
                           {' '}on{' '}
-                          <a href={unsplashCredits[1].source === 'pexels' ? 'https://www.pexels.com' : 'https://unsplash.com/?utm_source=nadaunse&utm_medium=referral'} target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>
+                          <a href={unsplashCredits[1].source === 'pexels' ? 'https://www.pexels.com' : 'https://unsplash.com/?utm_source=contents_maker&utm_medium=referral'} target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>
                             {unsplashCredits[1].source === 'pexels' ? 'Pexels' : 'Unsplash'}
                           </a>
                         </div>
@@ -1157,11 +1157,11 @@ export default function CardNewsPage() {
                           Photos by{' '}
                           {unsplashPhotos.map((c, i, arr) => (
                             <span key={c.id}>
-                              <a href={`${c.photographer_url}?utm_source=nadaunse&utm_medium=referral`} target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>{c.photographer}</a>
+                              <a href={`${c.photographer_url}?utm_source=contents_maker&utm_medium=referral`} target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>{c.photographer}</a>
                               {i < arr.length - 1 ? ', ' : ''}
                             </span>
                           ))}
-                          {' '}on <a href="https://unsplash.com/?utm_source=nadaunse&utm_medium=referral" target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>Unsplash</a>
+                          {' '}on <a href="https://unsplash.com/?utm_source=contents_maker&utm_medium=referral" target="_blank" rel="noopener noreferrer" style={{ color: C.textTertiary }}>Unsplash</a>
                         </>)}
                         {unsplashPhotos.length > 0 && pexelsPhotos.length > 0 && ' · '}
                         {pexelsPhotos.length > 0 && (<>

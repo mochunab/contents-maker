@@ -1078,7 +1078,7 @@ export default function MemeAdPage() {
                   <textarea
                     value={brandInfo}
                     onChange={e => setBrandInfo(e.target.value)}
-                    placeholder="예: 나다운세 - AI 타로/사주 운세 서비스. 매일 무료 운세 제공, 정확한 사주풀이"
+                    placeholder="예: MyApp - AI 콘텐츠 자동 생성 서비스. 숏폼·카드뉴스·광고 소재 원클릭 제작"
                     rows={3}
                     className="w-full outline-none bg-transparent resize-none"
                     style={{

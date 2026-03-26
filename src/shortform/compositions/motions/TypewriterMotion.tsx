@@ -50,7 +50,7 @@ export default function TypewriterMotion({ scene, accent }: MotionComponentProps
             fontFamily: "'Pretendard Variable', Pretendard, sans-serif",
             fontSize: 14, fontWeight: 500, color: 'rgba(255,255,255,0.3)',
             letterSpacing: '0.5px',
-          }}>nadaunse.sh</span>
+          }}>contents.sh</span>
         </div>
 
         {/* Content area */}
