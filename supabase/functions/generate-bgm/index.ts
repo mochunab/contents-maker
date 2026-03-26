@@ -1,9 +1,5 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
-
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-};
+import { getCorsHeaders, handleCorsPreflightRequest } from '../server/cors.ts';
 
 // Jamendo API 무드 → 태그 매핑
 const MOOD_TAG_MAP: Record<string, string[]> = {
@@ -27,8 +23,10 @@ function getDurationFilter(targetSeconds: number): string {
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
+    return handleCorsPreflightRequest(req);
   }
+
+  const corsHeaders = getCorsHeaders(req);
 
   try {
     const { mood, duration = 30 } = await req.json();
